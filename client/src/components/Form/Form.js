@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 
 import useStyles from "./styles";
-import { createPost, updatePost } from "../../actions/posts";
+import { createPost, updatePost } from "../../Redux/actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ title: "", message: "", tags: "", selectedFile: "" });
