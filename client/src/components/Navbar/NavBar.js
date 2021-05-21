@@ -12,26 +12,25 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const [token, setToken] = useState(null);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     history.push("/");
     setUser(null);
   };
-  let token;
   useEffect(() => {
-    token = user?.token;
-
+    setToken(user?.token);
     //JWT ...
 
+    if (token) {
+      const decodedtoken = decode(token);
+
+      if (decodedtoken * 1000 < new Date().getTime()) logout();
+    }
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
-  if (token) {
-    const decodedtoken = decode(token);
-
-    if (decodedtoken * 1000 < new Date().getTime()) logout();
-  }
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <Link to="/" className={classes.brandContainer}>

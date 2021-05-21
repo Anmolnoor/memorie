@@ -15,20 +15,13 @@ const PostDetails = () => {
 
   useEffect(() => {
     dispatch(getPost(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (post) {
       dispatch(getPostBySearch({ search: "none", tags: post?.tags.join(",") }));
     }
-  }, [post]);
-
-  // if (!post) return "No Post";
-
-  // if (isloading)
-  //   return (
-
-  //   );
+  }, [post, dispatch]);
 
   const recommendedPosts = posts.filter(({ _id }) => _id !== posts._id);
 
