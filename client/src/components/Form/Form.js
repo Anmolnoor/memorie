@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import useStyles from "./styles";
 import { createPost, updatePost } from "../../Redux/actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
-  const history = useHistory();
-  const [postData, setPostData] = useState({ title: "", message: "", tags: "", selectedFile: "" });
+  // let history = useHistory();
+  const [postData, setPostData] = useState({ title: "", message: "", tags: "", selectedFile: undefined });
   const post = useSelector((state) =>
     currentId ? state.posts.posts.find((message) => message._id === currentId) : null
   );
@@ -29,7 +29,7 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name, history }));
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
       clear();
     } else {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));

@@ -33,7 +33,8 @@ const X = (state = { isLoading: true, posts: [] }, action) => {
         posts: state?.posts?.map((post) => (post._id === action.payload._id ? action.payload : post)),
       };
     case CREATE:
-      return { ...state, posts: [...state, action.payload] };
+      console.log(state);
+      return { ...state, posts: [action.payload, ...state.posts] };
     case UPDATE:
       return {
         ...state,
